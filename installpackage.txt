@@ -1,0 +1,20 @@
+---
+- hosts: target
+  become: yes
+  tasks:
+    - name: Ensure EPEL repository is enabled
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and Enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+...

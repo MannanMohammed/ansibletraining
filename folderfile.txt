@@ -1,0 +1,20 @@
+---
+- name: Create directory on target server
+  hosts: all
+  vars:
+    src_file: /etc/ansible/test_project/movefile.txt
+    dest_file: /etc/ansible/test_project/movedfile.txt
+
+  tasks:
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: "{{ dest_file }}"
+        state: directory
+
+    - name: Copy file to target
+      copy:
+        src: "{{ src_file }}"
+        dest: "{{ dest_file }}"
+        owner: root
+        group: root
+        mode: '0644'

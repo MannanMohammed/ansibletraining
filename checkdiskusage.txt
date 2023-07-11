@@ -1,0 +1,8 @@
+---
+- name: Check disk usage
+  hosts: all
+  tasks:
+    - name: Check disk usage
+      command: df -h
+      register: disk_usage
+    - debug: var=disk_usage.stdout_lines

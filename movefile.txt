@@ -1,0 +1,14 @@
+---
+- name: Move file to target server
+  hosts: target
+  tasks:
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: /path/to/your/directory
+        state: directory
+
+    - name: Copy file to target
+      ansible.builtin.copy:
+        src: /path/on/controller/file.txt
+        dest: /path/to/your/directory/file.txt
+

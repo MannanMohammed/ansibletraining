@@ -1,0 +1,7 @@
+---
+- hosts: webservers
+  tasks:
+  - name: Run a script and check return code
+    script: /path/to/script.sh
+    register: result
+    failed_when: result.rc != 0

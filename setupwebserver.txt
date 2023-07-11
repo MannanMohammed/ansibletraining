@@ -1,0 +1,21 @@
+---
+- name: Basic Web Server Setup
+  hosts: target
+  become: yes
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: Add index.html
+      copy:
+        content: '<h1>Welcome to our server!</h1>'
+        dest: /var/www/html/index.html
+
+#ansible target_server -m ansible.builtin.systemd -a "name=nginx state=started" -b
+# You need nginx on the target.

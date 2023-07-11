@@ -1,0 +1,28 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Install Docker
+    yum:
+      name: docker
+      state: present
+
+#Start Docket Service
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+
+#Pull Docker Image
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Pull an image
+    docker_image:
+      name: busybox
+      source: pull

@@ -1,0 +1,8 @@
+---
+- name: Remove a file
+  hosts: target
+  tasks:
+    - name: Remove a file
+      file:
+        path: /path/to/file.txt
+        state: absent

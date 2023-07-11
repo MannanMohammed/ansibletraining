@@ -1,0 +1,29 @@
+---
+- hosts: target
+  become: yes
+  vars:
+    db_name: 'your_database'
+    db_user: 'your_username'
+    db_pass: 'your_password'
+
+  tasks:
+    - name: Check if database exists
+      community.mysql.mysql_info:
+        login_user: "{{ db_user }}"
+        login_password: "{{ db_pass }}"
+      register: db_info
+
+    - name: Print message if database exists
+      debug:
+        msg: "The database {{ db_name }} exists"
+      when: "'{{ db_name }}' in db_info.databases"
+
+    - name: Print message if database does not exist
+      debug:
+        msg: "The database {{ db_name }} does not exist"
+      when: "'{{ db_name }}' not in db_info.databases"
+...
+
+#ansible your_host_group -m shell -a 'mysql -u your_username -p your_database -e "SHOW DATABASES;"' -u your_ansible_user --ask-pass
+
+#yum list installed | grep mysql

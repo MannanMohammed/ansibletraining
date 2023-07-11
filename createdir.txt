@@ -1,0 +1,8 @@
+---
+- name: Create directory on target server
+  hosts: target
+  tasks:
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: /path/to/your/directory
+        state: directory
